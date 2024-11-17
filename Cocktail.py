@@ -7,7 +7,7 @@ api_key = st.secrets["api_key"]
 # OpenAI API Key
 openai.api_key = api_key
 
-st.title("Cocktail Recommendation")
+st.title("AI-Powered Cocktail Recommendation")
 
 # Collect user preferences
 spirit = st.selectbox(
@@ -44,14 +44,12 @@ if st.button("Get Cocktail Recommendation"):
 
     try:
         # Call OpenAI API using the updated method
-        response = openai.chat.completions.create
-            model="gpt-4",
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # You can use "gpt-3.5-turbo" if you don't have access to GPT-4
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that suggests cocktail recipes."},
                 {"role": "user", "content": prompt}
-            ],
-        max_tokens=500,
-        temperature=0.7
+            ]
         )
 
         # Access the message content correctly
