@@ -41,16 +41,17 @@ if st.button("Get Cocktail Recommendation"):
     )
 
     try:
-        # Call OpenAI API
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=prompt,
-            max_tokens=200,
-            temperature=0.7
+        # Call OpenAI API using the updated method
+        response = openai.chat.completions.create(
+            model="gpt-4",  
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that suggests cocktail recipes."},
+                {"role": "user", "content": prompt}
+            ]
         )
 
         # Extract and display the generated recipe
-        recipe = response.choices[0].text.strip()
+        recipe = response['choices'][0]['message']['content'].strip()
         st.subheader("Your Custom Cocktail Recommendation")
         st.write(recipe)
 
