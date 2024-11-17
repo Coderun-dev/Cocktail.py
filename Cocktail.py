@@ -1,6 +1,5 @@
 import openai
 import streamlit as st
-import os
 
 # Access the API key from Streamlit secrets
 api_key = st.secrets["api_key"]
@@ -45,16 +44,16 @@ if st.button("Get Cocktail Recommendation"):
 
     try:
         # Call OpenAI API using the updated method
-        response = openai.chat.completions.create(
-            model="gpt-4",  
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that suggests cocktail recipes."},
                 {"role": "user", "content": prompt}
             ]
         )
 
-        # Extract and display the generated recipe
-        recipe = response['choices'][0]['message']['content'].strip()
+        # Access the message content correctly
+        recipe = response.choices[0].message.content.strip()
         st.subheader("Your Custom Cocktail Recommendation")
         st.write(recipe)
 
