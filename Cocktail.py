@@ -44,7 +44,7 @@ if st.button("Get Cocktail Recommendation"):
 
     try:
         # Call OpenAI API using the updated method
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create
             model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that suggests cocktail recipes."},
