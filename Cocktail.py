@@ -7,7 +7,7 @@ api_key = st.secrets["api_key"]
 # OpenAI API Key
 openai.api_key = api_key
 
-st.title("AI-Powered Cocktail Recommendation")
+st.title("AI-Powered Fancy Cocktail Recommendation")
 
 # Collect user preferences
 spirit = st.selectbox(
@@ -31,15 +31,17 @@ strength = st.selectbox(
 )
 
 # Generate a recommendation using OpenAI's GPT
-if st.button("Get Cocktail Recommendation"):
+if st.button("Get Fancy Cocktail Recommendation"):
     # Construct the prompt for OpenAI
     prompt = (
-        f"Suggest a cocktail based on these preferences:\n"
+        f"Create a fancy, unique cocktail name and recipe based on these preferences:\n"
         f"Spirit: {spirit}\n"
         f"Sweetness: {sweetness}\n"
         f"Flavor Profile: {flavor_profile}\n"
         f"Strength: {strength}\n\n"
-        f"Provide the name of the cocktail, a brief description, and detailed preparation instructions."
+        f"Come up with a creative and sophisticated name for the cocktail, "
+        f"followed by a brief, intriguing description and detailed preparation instructions. "
+        f"Make sure the name is catchy and elegant."
     )
 
     try:
@@ -47,14 +49,14 @@ if st.button("Get Cocktail Recommendation"):
         response = openai.chat.completions.create(
             model="gpt-4",  # You can use "gpt-3.5-turbo" if you don't have access to GPT-4
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that suggests cocktail recipes."},
+                {"role": "system", "content": "You are a creative mixologist that suggests fancy and sophisticated cocktail recipes."},
                 {"role": "user", "content": prompt}
             ]
         )
 
         # Access the message content correctly
         recipe = response.choices[0].message.content.strip()
-        st.subheader("Your Custom Cocktail Recommendation")
+        st.subheader("Your Fancy Cocktail Recommendation")
         st.write(recipe)
 
     except Exception as e:
