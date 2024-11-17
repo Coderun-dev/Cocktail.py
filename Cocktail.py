@@ -7,7 +7,7 @@ api_key = st.secrets["api_key"]
 # OpenAI API Key
 openai.api_key = api_key
 
-st.title("AI-Powered Fancy Cocktail Recommendation")
+st.title("Lancaster Fancy Cocktail Recommendation")
 
 # Collect user preferences
 spirit = st.selectbox(
