@@ -2,10 +2,13 @@ import openai
 import streamlit as st
 import os
 
-# Set your OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Access the API key from Streamlit secrets
+api_key = st.secrets["api_key"]
 
-st.title("AI-Powered Cocktail Recommendation")
+# OpenAI API Key
+openai.api_key = api_key
+
+st.title("Cocktail Recommendation")
 
 # Collect user preferences
 spirit = st.selectbox(
